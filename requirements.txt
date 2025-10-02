@@ -1,0 +1,9 @@
+streamlit>=1.50
+pandas
+numpy
+pyarrow
+plotly
+python-dateutil
+matplotlib
+seaborn
+gdown
