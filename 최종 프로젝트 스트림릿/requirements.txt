@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+pyarrow           # Parquet 캐시/변환에 필요
+plotly
+python-dateutil   # relativedelta 등
+matplotlib        # 3번 코드(Details 히트맵 등)에서 사용
+seaborn           # 3번 코드에서 사용
