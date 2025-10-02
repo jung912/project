@@ -6,36 +6,6 @@ import numpy as np
 import streamlit as st
 import seaborn as sns
 import gdown
-# utils_data.py (혹은 app.py 상단 가까이)
-from pathlib import Path
-import hashlib
-import pandas as pd
-import streamlit as st
-import gdown
-
-BASE = Path(__file__).parent
-
-def ensure_local_from_gdrive(file_id: str, filename: str, sha256: str | None = None) -> Path:
-    dst = BASE / filename
-    if not dst.exists():
-        gdown.download(id=file_id, output=str(dst), quiet=False, use_cookies=False)
-    if sha256:
-        h = hashlib.sha256()
-        with open(dst, "rb") as f:
-            for chunk in iter(lambda: f.read(1 << 20), b""):
-                h.update(chunk)
-        if h.hexdigest() != sha256:
-            dst.unlink(missing_ok=True)
-            raise RuntimeError(f"Checksum mismatch for {filename}")
-    return dst
-
-@st.cache_data(show_spinner=False)
-def load_csv_cached(path: str, **read_csv_kws):
-    return pd.read_csv(path, **read_csv_kws)
-
-@st.cache_data(show_spinner=False)
-def load_parquet_cached(path: str):
-    return pd.read_parquet(path)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 0) 이 파일에서만 set_page_config 1회 호출 (원본 파일들은 손대지 않음)
